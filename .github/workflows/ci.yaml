@@ -27,42 +27,42 @@ jobs:
         working-directory: ./kjell
 
     deploy:
-    needs: build  # This job waits for the 'build' job to complete
-    if: github.ref == 'refs/heads/main'  # Only runs for the 'main' branch
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-      - run: |
-          echo "Checking if the S3 bucket exists..."
-          if ! aws s3api head-bucket --bucket ${{ env.S3_BUCKET }} 2>&1; then
-            echo "Bucket does not exist. Creating bucket..."
-            aws s3 mb s3://${{ env.S3_BUCKET }} --region ${{ env.AWS_REGION }}
-            echo "Bucket created."
-          else
-            echo "Bucket already exists."
-          fi
-      - name: Deploy SAM application
-        run: |
-            sam deploy \
-              --stack-name candistack2044 \
-              --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
-              --region ${{ env.AWS_REGION }} \
-              --s3-bucket ${{ env.S3_BUCKET }} \
-              --no-fail-on-empty-changeset \
-              --no-confirm-changeset \
-              --parameter-overrides BucketNameParameter=kjellsbucket2044
-        env:
-          AWS_REGION: eu-west-1
-          S3_BUCKET: kjellsbucket2044
-          AWS_DEFAULT_REGION: eu-west-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        working-directory: ./kjell
+        needs: build  # This job waits for the 'build' job to complete
+        if: github.ref == 'refs/heads/main'  # Only runs for the 'main' branch
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - uses: aws-actions/configure-aws-credentials@v1
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ${{ env.AWS_REGION }}
+          - run: |
+              echo "Checking if the S3 bucket exists..."
+              if ! aws s3api head-bucket --bucket ${{ env.S3_BUCKET }} 2>&1; then
+                echo "Bucket does not exist. Creating bucket..."
+                aws s3 mb s3://${{ env.S3_BUCKET }} --region ${{ env.AWS_REGION }}
+                echo "Bucket created."
+              else
+                echo "Bucket already exists."
+              fi
+          - name: Deploy SAM application
+            run: |
+                sam deploy \
+                  --stack-name candistack2044 \
+                  --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
+                  --region ${{ env.AWS_REGION }} \
+                  --s3-bucket ${{ env.S3_BUCKET }} \
+                  --no-fail-on-empty-changeset \
+                  --no-confirm-changeset \
+                  --parameter-overrides BucketNameParameter=kjellsbucket2044
+            env:
+              AWS_REGION: eu-west-1
+              S3_BUCKET: kjellsbucket2044
+              AWS_DEFAULT_REGION: eu-west-1
+              AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            working-directory: ./kjell
 
 
 
