@@ -3,11 +3,15 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - '*'  # Trigger for alle branches
+      - '*'  # Trigger for all branches
 
 defaults:
   run:
     working-directory: ./kjell
+
+env:
+  AWS_REGION: eu-west-1
+  S3_BUCKET: kjellsbucket2044  # Define the bucket name here for use throughout
 
 jobs:
   build:
@@ -23,8 +27,8 @@ jobs:
         working-directory: ./kjell
 
   deploy:
-    needs: build  # Denne jobben venter på at 'build' jobben fullfører
-    if: github.ref == 'refs/heads/main'  # Kjører kun for 'main' branchen
+    needs: build  # This job waits for the 'build' job to complete
+    if: github.ref == 'refs/heads/main'  # Only runs for the 'main' branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +36,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          aws-region: ${{ env.AWS_REGION }}
       - run: |
           echo "Checking if the S3 bucket exists..."
           if ! aws s3api head-bucket --bucket ${{ env.S3_BUCKET }} 2>&1; then
@@ -51,12 +55,7 @@ jobs:
               --s3-bucket ${{ env.S3_BUCKET }} \
               --no-fail-on-empty-changeset \
               --no-confirm-changeset
-        env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_REGION: eu-west-1
-            S3_BUCKET: kjellsbucket2044
-        working-directory: ./eksamen_2023-main/kjell
+        working-directory: ./kjell  # Adjusted to the correct directory
 
 
 
