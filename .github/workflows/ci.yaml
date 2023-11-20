@@ -26,7 +26,7 @@ jobs:
       - run: sam build --template-file template.yaml
         working-directory: ./kjell
 
-  deploy:
+    deploy:
     needs: build  # This job waits for the 'build' job to complete
     if: github.ref == 'refs/heads/main'  # Only runs for the 'main' branch
     runs-on: ubuntu-latest
@@ -54,9 +54,15 @@ jobs:
               --region ${{ env.AWS_REGION }} \
               --s3-bucket ${{ env.S3_BUCKET }} \
               --no-fail-on-empty-changeset \
-              --no-confirm-changeset
+              --no-confirm-changeset \
               --parameter-overrides BucketNameParameter=kjellsbucket2044
-        working-directory: ./kjell  # Adjusted to the correct directory
+        env:
+          AWS_REGION: eu-west-1
+          S3_BUCKET: kjellsbucket2044
+          AWS_DEFAULT_REGION: eu-west-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        working-directory: ./kjell
 
 
 
