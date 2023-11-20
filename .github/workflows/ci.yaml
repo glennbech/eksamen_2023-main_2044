@@ -55,6 +55,7 @@ jobs:
               --s3-bucket ${{ env.S3_BUCKET }} \
               --no-fail-on-empty-changeset \
               --no-confirm-changeset
+              --parameter-overrides BucketNameParameter=kjellsbucket2044
         working-directory: ./kjell  # Adjusted to the correct directory
 
 
