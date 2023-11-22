@@ -115,6 +115,7 @@ jobs:
       AWS_REGION: eu-west-1
       IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest #Change the <sporeb15-private> to your ECR repository
       PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
+      working-directory: ./infra
  #    TF_LOG: trace
     steps:
       - uses: actions/checkout@v3
@@ -124,17 +125,21 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        working-directory: ${{env.working-directory}}
 
       - name: Terraform Plan
         id: plan
         run: terraform plan   -var="prefix=$PREFIX" -var="image=$IMAGE"  -no-color
         continue-on-error: true
+        working-directory: ${{env.working-directory}}
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+        working-directory: ${{env.working-directory}}
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE"  -auto-approve  
+        run: terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE"  -auto-approve
+        working-directory: ${{env.working-directory}}
   
