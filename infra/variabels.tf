@@ -7,13 +7,13 @@ variable "service_name" {
 variable "instance_cpu" {
   description = "The number of CPU units reserved for each instance of your App Runner service"
   type        = number
-  default     = 256
+  default     = 1024
 }
 
 variable "instance_memory" {
   description = "The amount of memory, in MB, reserved for each instance of your App Runner service"
   type        = number
-  default     = 1024
+  default     = 2048
 }
 
 variable "app_port" {
