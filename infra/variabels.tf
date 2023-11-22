@@ -34,6 +34,18 @@ variable "access_role_arn" {
   default     = "arn:aws:iam::244530008913:role/service-role/AppRunnerECRAccessRole"
 }
 
+variable "role_name" {
+  description = "The name of the IAM role for App Runner service"
+  type        = string
+  default     = "candidate2044-role-thingye" // Set a default name or leave it empty to require an explicit value
+}
+
+variable "policy_name" {
+  description = "The name of the IAM policy for App Runner service"
+  type        = string
+  default     = "candidate2044-apr-policy-thingy" // Set a default name or leave it empty to require an explicit value
+}
+
 variable "prefix" {
   type = string
 }
