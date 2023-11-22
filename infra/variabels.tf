@@ -32,3 +32,11 @@ variable "access_role_arn" {
   type        = string
   default     = "arn:aws:iam::244530008913:role/service-role/AppRunnerECRAccessRole"
 }
+
+variable "prefix" {
+  type = string
+}
+
+variable "image" {
+  type = string
+}
