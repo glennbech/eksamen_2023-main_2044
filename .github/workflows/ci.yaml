@@ -107,14 +107,14 @@ jobs:
   
   terraform:
     name: "Terraform"
-    needs: build_docker_image
+    needs: build-and-push-docker
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: eu-west-1
-      IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest
-      PREFIX: candidate2044
+      IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest #Change the <sporeb15-private> to your ECR repository
+      PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
  #    TF_LOG: trace
     steps:
       - uses: actions/checkout@v3
