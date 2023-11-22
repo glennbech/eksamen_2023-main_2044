@@ -1,19 +1,21 @@
 resource "aws_apprunner_service" "service" {
-  service_name = "kjell-is-king"
+  service_name = var.service_name
 
   instance_configuration {
     instance_role_arn = aws_iam_role.role_for_apprunner_service.arn
+    cpu               = var.instance_cpu
+    memory            = var.instance_memory
   }
 
   source_configuration {
     authentication_configuration {
-      access_role_arn = "arn:aws:iam::244530008913:role/service-role/AppRunnerECRAccessRole"
+      access_role_arn = var.access_role_arn
     }
     image_repository {
       image_configuration {
-        port = "8080"
+        port = var.app_port
       }
-      image_identifier      = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/kjell:latest"
+      image_identifier      = var.image_identifier
       image_repository_type = "ECR"
     }
     auto_deployments_enabled = true
@@ -24,7 +26,6 @@ resource "aws_iam_role" "role_for_apprunner_service" {
   name               = "kjell-role-thingy"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
-
 
 data "aws_iam_policy_document" "assume_role" {
   statement {
@@ -65,9 +66,7 @@ resource "aws_iam_policy" "policy" {
   policy      = data.aws_iam_policy_document.policy.json
 }
 
-
 resource "aws_iam_role_policy_attachment" "attachment" {
   role       = aws_iam_role.role_for_apprunner_service.name
   policy_arn = aws_iam_policy.policy.arn
 }
-
