@@ -14,9 +14,18 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Timer;
+import io.micrometer.core.instrument.DistributionSummary;
+import io.micrometer.core.instrument.MeterRegistry;
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -24,13 +33,44 @@ public class RekognitionController implements ApplicationListener<ApplicationRea
 
     private final AmazonS3 s3Client;
     private final AmazonRekognition rekognitionClient;
+    
+    private final Timer responseTimeTimer;
+    private final Counter imageCounter;
+    private final DistributionSummary violationSummary;
+    private final MeterRegistry meterRegistry; 
+    
 
     private static final Logger logger = Logger.getLogger(RekognitionController.class.getName());
-
-    public RekognitionController() {
+    
+    @Autowired
+    public RekognitionController(MeterRegistry meterRegistry) {
+        this.meterRegistry = meterRegistry;
         this.s3Client = AmazonS3ClientBuilder.standard().build();
         this.rekognitionClient = AmazonRekognitionClientBuilder.standard().build();
+
+        
+        // Initializing the metrics
+        this.responseTimeTimer = this.meterRegistry.timer("response_time");
+        this.imageCounter = this.meterRegistry.counter("image_count");
+        this.violationSummary = this.meterRegistry.summary("violation_summary");
     }
+    
+    @GetMapping(value = "/metrics/response-time")
+    public ResponseEntity<String> getResponseTimeMetric() {
+        double averageResponseTime = responseTimeTimer.mean(TimeUnit.MILLISECONDS);
+        return ResponseEntity.ok("Average Response Time: " + averageResponseTime + "ms");
+    }
+    
+    @GetMapping(value = "/metrics/image-count")
+    public ResponseEntity<String> getImageCountMetric() {
+        return ResponseEntity.ok("Total Images Processed: " + imageCounter.count());
+    }
+    
+    @GetMapping(value = "/metrics/violation-summary")
+    public ResponseEntity<String> getViolationSummaryMetric() {
+        return ResponseEntity.ok("Total Violations: " + violationSummary.totalAmount());
+    }
+    
 
     /**
      * This endpoint takes an S3 bucket name in as an argument, scans all the
@@ -43,6 +83,9 @@ public class RekognitionController implements ApplicationListener<ApplicationRea
     @GetMapping(value = "/scan-ppe", consumes = "*/*", produces = "application/json")
     @ResponseBody
     public ResponseEntity<PPEResponse> scanForPPE(@RequestParam String bucketName) {
+        //Start the timer for response time
+        Timer.Sample sample = Timer.start(meterRegistry);
+        
         // List all objects in the S3 bucket
         ListObjectsV2Result imageList = s3Client.listObjectsV2(bucketName);
 
@@ -51,6 +94,9 @@ public class RekognitionController implements ApplicationListener<ApplicationRea
 
         // This is all the images in the bucket
         List<S3ObjectSummary> images = imageList.getObjectSummaries();
+        
+         // Increment the image counter for each image in the bucket
+        imageCounter.increment(images.size());
 
         // Iterate over each object and scan for PPE
         for (S3ObjectSummary image : images) {
@@ -77,6 +123,14 @@ public class RekognitionController implements ApplicationListener<ApplicationRea
             PPEClassificationResponse classification = new PPEClassificationResponse(image.getKey(), personCount, violation);
             classificationResponses.add(classification);
         }
+        
+        // Record the number of violations found
+        long violationsCount = classificationResponses.stream().filter(PPEClassificationResponse::isViolation).count();
+        violationSummary.record(violationsCount);
+
+        // Stop the timer and record the time
+        sample.stop(responseTimeTimer);
+        
         PPEResponse ppeResponse = new PPEResponse(bucketName, classificationResponses);
         return ResponseEntity.ok(ppeResponse);
     }
@@ -96,7 +150,6 @@ public class RekognitionController implements ApplicationListener<ApplicationRea
                 .anyMatch(bodyPart -> bodyPart.getName().equals("FACE")
                         && bodyPart.getEquipmentDetections().isEmpty());
     }
-
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {

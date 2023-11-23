@@ -23,18 +23,23 @@
     </properties>
 
     <dependencies>
+        <!-- Spring Boot Actuator to expose metrics endpoint -->
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
         
         <!-- Micrometer CloudWatch Registry Dependency -->
-    	<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-cloudwatch2</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+       </dependency>
         
         <!-- Micrometer Core Dependency -->
         <dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-core</artifactId>
-		</dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-cloudwatch2</artifactId>
+        </dependency>
         
         <!-- AWS Java SDK -->
         <dependency>
