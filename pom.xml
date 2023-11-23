@@ -23,6 +23,19 @@
     </properties>
 
     <dependencies>
+        
+        <!-- Micrometer CloudWatch Registry Dependency -->
+    	<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-cloudwatch2</artifactId>
+		</dependency>
+        
+        <!-- Micrometer Core Dependency -->
+        <dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-core</artifactId>
+		</dependency>
+        
         <!-- AWS Java SDK -->
         <dependency>
             <groupId>com.amazonaws</groupId>
