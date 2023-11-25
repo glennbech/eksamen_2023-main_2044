@@ -15,13 +15,15 @@ resource "aws_cloudwatch_dashboard" "main" {
         "metrics": [
           [
             "${var.candidate}",
-            "response_time", "service", "s3rekognition"
+            "response_time",
+            "service",
+            "s3rekognition"
           ]
         ],
         "period": 300,
-        "stat": "Avarage",
+        "stat": "Average",
         "region": "eu-west-1",
-        "title": "Avarage Response time"
+        "title": "Average Response Time"
       }
     },
     {
