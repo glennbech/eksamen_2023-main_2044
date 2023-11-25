@@ -19,7 +19,7 @@ resource "aws_cloudwatch_dashboard" "main" {
           ]
         ],
         "period": 300,
-        "stat": "Avarge",
+        "stat": "Avarage",
         "region": "eu-west-1",
         "title": "Avarage Response time"
       }
