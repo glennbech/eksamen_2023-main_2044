@@ -20,6 +20,7 @@ variable "instance_memory" {
   description = "The amount of memory, in MB, reserved for each instance of your App Runner service"
   type        = number
   default     = 2048
+}
 
 variable "app_port" {
   description = "The port the application is running on"
