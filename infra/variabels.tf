@@ -4,6 +4,12 @@ variable "service_name" {
   default     = "kjell-is-candidate2044" // Change this default value as needed
 }
 
+variable "candidate" {
+  description = "The name of the dashboard name"
+  type        = string
+  default     = "cloudwatch-candidate2044" // Change this default value as needed
+}
+
 variable "instance_cpu" {
   description = "The number of CPU units reserved for each instance of your App Runner service"
   type        = number
@@ -14,7 +20,6 @@ variable "instance_memory" {
   description = "The amount of memory, in MB, reserved for each instance of your App Runner service"
   type        = number
   default     = 2048
-}
 
 variable "app_port" {
   description = "The port the application is running on"
