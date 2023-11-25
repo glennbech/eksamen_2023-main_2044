@@ -71,6 +71,11 @@ resource "aws_iam_role_policy_attachment" "attachment" {
   policy_arn = aws_iam_policy.policy.arn
 }
 
+resource "aws_sns_topic" "user_updates" {
+  name = "user-updates-topic"
+}
+
 module "alarm" {
   source = "./alarm"
+  sns_topic_arn = aws_sns_topic.user_updates.arn
 }
