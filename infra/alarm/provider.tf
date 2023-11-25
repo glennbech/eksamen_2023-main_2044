@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
-  alarm_name  = "high_response_time"
+  alarm_name  = "high_response_time-alarm"
   namespace   = "cloudwatch-candidate2044"
   metric_name = "response_time"
 
@@ -7,14 +7,12 @@ resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
   threshold           = 2000
   evaluation_periods  = "2"
   period              = "60"
-  statistic           = "Maximum"
+  statistic           = "Average"
 
   alarm_description = "This alarm monitors high response times"
   alarm_actions     = [aws_sns_topic.user_updates.arn]
-}
-
-resource "aws_sns_topic" "user_updates" {
-  name = "high_response_time-alarm-topic"
+  ok_actions                = [aws_sns_topic.user_updates.arn]
+  insufficient_data_actions = []
 }
 
 resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
