@@ -77,5 +77,5 @@ resource "aws_sns_topic" "user_updates" {
 
 module "alarm" {
   source        = "./alarm"
-  //sns_topic_arn = aws_sns_topic.user_updates.arn
+  sns_topic_arn = aws_sns_topic.user_updates.arn
 }
