@@ -33,7 +33,7 @@ resource "aws_cloudwatch_dashboard" "main" {
       "properties": {
         "metrics": [
           [
-            "${var.student_name}",
+            "${var.candidate}",
             "count_image", "service", "s3rekognition"
           ]
         ],
@@ -52,7 +52,7 @@ resource "aws_cloudwatch_dashboard" "main" {
       "properties": {
         "metrics": [
           [
-            "${var.student_name}",
+            "${var.candidate}",
             "total_violation", "service", "s3rekognition"
           ]
         ],
