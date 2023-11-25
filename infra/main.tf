@@ -70,3 +70,9 @@ resource "aws_iam_role_policy_attachment" "attachment" {
   role       = aws_iam_role.role_for_apprunner_service.name
   policy_arn = aws_iam_policy.policy.arn
 }
+
+module "alarm" {
+  source = "./alarm"
+  alarm_email = "rebeckaspolander@yahoo.se"
+  prefix = var.candidate
+}
