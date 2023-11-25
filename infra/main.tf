@@ -73,6 +73,4 @@ resource "aws_iam_role_policy_attachment" "attachment" {
 
 module "alarm" {
   source = "./alarm"
-  alarm_email = "rebeckaspolander@yahoo.se"
-  prefix = var.candidate
 }
