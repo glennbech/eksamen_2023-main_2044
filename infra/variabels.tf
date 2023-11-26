@@ -1,7 +1,7 @@
 variable "service_name" {
   description = "The name of the App Runner service"
   type        = string
-  default     = "kjell-is-candidate2044" // Change this default value as needed
+  //default     = "kjell-is-candidate2044" // Change this default value as needed
 }
 
 variable "candidate" {
