@@ -119,7 +119,7 @@ jobs:
       AWS_REGION: eu-west-1
       IMAGE_IDENTIFIER: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest #Change the <sporeb15-private> to your ECR repository
       PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
-      SERVICE_NAME: ${PREFIX}
+      SERVICE_NAME: ${{PREFIX}}
       working-directory: ./infra
  #    TF_LOG: trace
     steps:
@@ -145,6 +145,6 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -var="prefix=$PREFIX" -var="image_identifier=$IMAGE_IDENTIFIER"  -auto-approve
+        run: terraform apply -var="prefix=$PREFIX" -var="image_identifier=$IMAGE_IDENTIFIER" -var="service_name=$SERVICE_NAME"  -auto-approve
         working-directory: ${{env.working-directory}}
   
