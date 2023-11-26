@@ -1,7 +1,7 @@
 //ref: 
 //https://github.com/Rebeckaspolander/cloudwatch_alarms_terraform/blob/main/infra/main.tf
 resource "aws_cloudwatch_dashboard" "main" {
-  dashboard_name = var.candidate
+  dashboard_name = "cloudwatch-${var.candidate}"
   dashboard_body = <<DASHBOARD
 {
   "widgets": [
