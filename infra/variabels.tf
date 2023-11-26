@@ -13,13 +13,13 @@ variable "ecr_repository"{
 variable "service_name" {
   description = "The name of the App Runner service"
   type        = string
-  name     = "kjell-is-${var.candidate_prefix}"
+  //name     = "kjell-is-${var.candidate_prefix}"
 }
 
 variable "candidate" {
   description = "The name of the dashboard name"
   type        = string
-  name     = "cloudwatch-${var.candidate_prefix}"
+  //name     = "cloudwatch-${var.candidate_prefix}"
 }
 
 variable "instance_cpu" {
@@ -43,7 +43,7 @@ variable "app_port" {
 variable "image_identifier" {
   description = "The identifier of the image in ECR"
   type        = string
-  name     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repository}:latest" 
+  //name     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repository}:latest" 
 }
 
 variable "access_role_arn" {
@@ -55,13 +55,13 @@ variable "access_role_arn" {
 variable "role_name" {
   description = "The name of the IAM role for App Runner service"
   type        = string
-  name     = "${var.candidate_prefix}-role-thingye"
+//  name     = "${var.candidate_prefix}-role-thingye"
 }
 
 variable "policy_name" {
   description = "The name of the IAM policy for App Runner service"
   type        = string
-  name     = "${var.candidate_prefix}-apr-policy-thingy" 
+ // name     = "${var.candidate_prefix}-apr-policy-thingy" 
 }
 
 //variable "prefix" {
