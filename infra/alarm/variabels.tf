@@ -3,3 +3,10 @@ variable "sns_topic_arn" {
   type        = string
 }
 
+variable "prefix" {
+  type = string
+}
+
+variable "alarm_email" {
+  type = string
+}

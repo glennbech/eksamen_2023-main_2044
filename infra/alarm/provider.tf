@@ -2,7 +2,7 @@
 //https://github.com/glennbechdevops/cloudwatch_alarms_terraform/blob/main/infra/main.tf
 resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
   alarm_name  = "high_response_time-alarm"
-  namespace   = "cloudwatch-candidate2044"
+  namespace   = "cloudwatch-${var.prefix}"
   metric_name = "response_time"
 
   comparison_operator = "GreaterThanThreshold"
@@ -20,5 +20,5 @@ resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
 resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
   topic_arn = var.sns_topic_arn
   protocol  = "email"
-  endpoint  = "rebeckaspolander@yahoo.se"
+  endpoint  = var.alarm_email
 }
