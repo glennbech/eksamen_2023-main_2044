@@ -1,13 +1,25 @@
+variable "candidate_prefix"{
+  description = "The common prefix used in resource names"
+  type = string
+  default = "candidate2044" //Change this value. This value is used in multiple places
+}
+
+variable "ecr_repository"{
+  description = "Your own repositorie where your image tag is created"
+  type = string
+  default = "sporeb15-private" // Change this value to tour own ECR repository.
+} 
+
 variable "service_name" {
   description = "The name of the App Runner service"
   type        = string
-  default     = "kjell-is-candidate2044" // Change this default value as needed
+  default     = "kjell-is-${var.candidate_prefix}"
 }
 
 variable "candidate" {
   description = "The name of the dashboard name"
   type        = string
-  default     = "cloudwatch-candidate2044" // Change this default value as needed
+  default     = "cloudwatch-${var.candidate_prefix}"
 }
 
 variable "instance_cpu" {
@@ -31,7 +43,7 @@ variable "app_port" {
 variable "image_identifier" {
   description = "The identifier of the image in ECR"
   type        = string
-  default     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest" //Change this to your own repositorie where your image tag is created.
+  default     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repository}:latest" 
 }
 
 variable "access_role_arn" {
@@ -43,13 +55,13 @@ variable "access_role_arn" {
 variable "role_name" {
   description = "The name of the IAM role for App Runner service"
   type        = string
-  default     = "candidate2044-role-thingye" // Set a default name or leave it empty to require an explicit value
+  default     = "${var.candidate_prefix}-role-thingye"
 }
 
 variable "policy_name" {
   description = "The name of the IAM policy for App Runner service"
   type        = string
-  default     = "candidate2044-apr-policy-thingy" // Set a default name or leave it empty to require an explicit value
+  default     = "${var.candidate_prefix}-apr-policy-thingy" 
 }
 
 variable "prefix" {

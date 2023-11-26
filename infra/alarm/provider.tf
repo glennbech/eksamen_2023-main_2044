@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
   alarm_name  = "high_response_time-alarm"
-  namespace   = "cloudwatch-candidate2044"
+  namespace   = "cloudwatch-${var.candidate_prefix}"
   metric_name = "response_time"
 
   comparison_operator = "GreaterThanThreshold"
@@ -10,13 +10,14 @@ resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
   statistic           = "Average"
 
   alarm_description = "This alarm monitors high response times"
-  alarm_actions     = [var.sns_topic_arn]
-  ok_actions        = [var.sns_topic_arn]
+  alarm_actions     = [aws_sns_topic.user_updates.arn]
+  ok_actions                = [aws_sns_topic.user_updates.arn]
   insufficient_data_actions = []
 }
 
 resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
+  
   topic_arn = var.sns_topic_arn
   protocol  = "email"
-  endpoint  = "rebeckaspolander@yahoo.se"
+  endpoint  = var.alarm_email
 }
