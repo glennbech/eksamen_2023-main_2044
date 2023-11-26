@@ -114,7 +114,8 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: eu-west-1
       IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest #Change the <sporeb15-private> to your ECR repository
-      PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
+      CANDIDATE_PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
+      ECR_REPOSITORY: sporeb15-private 
       working-directory: ./infra
  #    TF_LOG: trace
     steps:
@@ -129,7 +130,11 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan   -var="prefix=$PREFIX" -var="image=$IMAGE"  -no-color
+         run: |
+          terraform plan -var="candidate_prefix=${{ env.CANDIDATE_PREFIX }}" \
+                         -var="ecr_repository=${{ env.ECR_REPOSITORY }}" \
+                         -var="image_identifier=244530008913.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:latest" \
+                         -no-color
         continue-on-error: true
         working-directory: ${{env.working-directory}}
 
@@ -140,6 +145,10 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -var="prefix=$PREFIX" -var="image=$IMAGE"  -auto-approve
+        run: |
+          terraform apply -var="candidate_prefix=${{ env.CANDIDATE_PREFIX }}" \
+                          -var="ecr_repository=${{ env.ECR_REPOSITORY }}" \
+                          -var="image_identifier=244530008913.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:latest" \
+                          -auto-approve
         working-directory: ${{env.working-directory}}
   

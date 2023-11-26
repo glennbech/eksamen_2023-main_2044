@@ -1,25 +1,25 @@
 variable "candidate_prefix"{
   description = "The common prefix used in resource names"
   type = string
-  default = "candidate2044" //Change this value. This value is used in multiple places
+  //default = "candidate2044" //Change this value. This value is used in multiple places
 }
 
 variable "ecr_repository"{
   description = "Your own repositorie where your image tag is created"
   type = string
-  default = "sporeb15-private" // Change this value to tour own ECR repository.
+  //default = "sporeb15-private" // Change this value to tour own ECR repositor
 } 
 
 variable "service_name" {
   description = "The name of the App Runner service"
   type        = string
-  default     = "kjell-is-${var.candidate_prefix}"
+  name     = "kjell-is-${var.candidate_prefix}"
 }
 
 variable "candidate" {
   description = "The name of the dashboard name"
   type        = string
-  default     = "cloudwatch-${var.candidate_prefix}"
+  name     = "cloudwatch-${var.candidate_prefix}"
 }
 
 variable "instance_cpu" {
@@ -43,7 +43,7 @@ variable "app_port" {
 variable "image_identifier" {
   description = "The identifier of the image in ECR"
   type        = string
-  default     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repository}:latest" 
+  name     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repository}:latest" 
 }
 
 variable "access_role_arn" {
@@ -55,18 +55,18 @@ variable "access_role_arn" {
 variable "role_name" {
   description = "The name of the IAM role for App Runner service"
   type        = string
-  default     = "${var.candidate_prefix}-role-thingye"
+  name     = "${var.candidate_prefix}-role-thingye"
 }
 
 variable "policy_name" {
   description = "The name of the IAM policy for App Runner service"
   type        = string
-  default     = "${var.candidate_prefix}-apr-policy-thingy" 
+  name     = "${var.candidate_prefix}-apr-policy-thingy" 
 }
 
-variable "prefix" {
-  type = string
-}
+//variable "prefix" {
+//  type = string
+//}
 
 variable "image" {
   type = string
