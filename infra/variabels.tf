@@ -31,7 +31,7 @@ variable "app_port" {
 variable "image_identifier" {
   description = "The identifier of the image in ECR"
   type        = string
-  default     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest" //Change this to your own repositorie where your image tag is created.
+  //default     = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest" //Change this to your own repositorie where your image tag is created.
 }
 
 variable "access_role_arn" {
