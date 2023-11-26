@@ -75,7 +75,7 @@ resource "aws_sns_topic" "user_updates" {
   name = "user-updates-topic"
 }
 
-module "alarm" {
+module "alarm_email" {
   source        = "./alarm"
   sns_topic_arn = aws_sns_topic.user_updates.arn
 }
