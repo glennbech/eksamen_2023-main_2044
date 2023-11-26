@@ -1,3 +1,7 @@
+# ref:
+#https://docs.aws.amazon.com/cli/latest/reference/s3api/head-bucket.html#
+#https://github.com/glennbechdevops/01-CI-Github-actions
+#https://github.com/glennbechdevops/spring-docker-dockerhub
 name: CI/CD Pipeline
 
 on:

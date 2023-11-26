@@ -56,14 +56,6 @@ variable "prefix" {
   type = string
 }
 
-variable "image" {
-  type = string
-}
-
-//variable "prefix" {
-//  type = string
-//}
-
 //variable "image" {
 //  type = string
 //}

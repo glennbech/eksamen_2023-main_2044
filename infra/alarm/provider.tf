@@ -1,3 +1,5 @@
+// Ref:
+//https://github.com/glennbechdevops/cloudwatch_alarms_terraform/blob/main/infra/main.tf
 resource "aws_cloudwatch_metric_alarm" "high_response_time_alarm" {
   alarm_name  = "high_response_time-alarm"
   namespace   = "cloudwatch-candidate2044"
