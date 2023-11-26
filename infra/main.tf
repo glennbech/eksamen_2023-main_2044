@@ -1,5 +1,5 @@
 resource "aws_apprunner_service" "service" {
-  service_name = "kjell-is-${var.candidate_prefix}"
+  service_name = var.service_name
 
   instance_configuration {
     instance_role_arn = aws_iam_role.role_for_apprunner_service.arn
@@ -15,7 +15,7 @@ resource "aws_apprunner_service" "service" {
       image_configuration {
         port = var.app_port
       }
-      image_identifier      = "244530008913.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repository}:latest"
+      image_identifier      = var.image_identifier
       image_repository_type = "ECR"
     }
     auto_deployments_enabled = true
@@ -23,7 +23,7 @@ resource "aws_apprunner_service" "service" {
 }
 
 resource "aws_iam_role" "role_for_apprunner_service" {
-  name               = "${var.candidate_prefix}-role-thingy"
+  name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "policy" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "${var.candidate_prefix}-apr-policy-thingy"
+  name        = var.policy_name
   description = "Policy for apprunner instance I think"
   policy      = data.aws_iam_policy_document.policy.json
 }
