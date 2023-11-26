@@ -123,6 +123,7 @@ jobs:
       DASHBOARD_NAME: ${PREFIX}
       ROLE_NAME: ${PREFIX}
       POLICY_NAME: ${PREFIX} 
+      ALARM_EMAIL: rebeckaspolander@yahoo.se
       
       working-directory: ./infra
  #    TF_LOG: trace
@@ -146,6 +147,7 @@ jobs:
           -var="service_name=$SERVICE_NAME" \
           -var="role_name=$ROLE_NAME" \
           -var="policy_name=$POLICY_NAME" \
+          -var="alarm_email=$ALARM_EMAIL" \
           -no-color
         continue-on-error: true
         working-directory: ${{env.working-directory}}
@@ -165,6 +167,7 @@ jobs:
           -var="service_name=$SERVICE_NAME" \
           -var="role_name=$ROLE_NAME" \
           -var="policy_name=$POLICY_NAME" \
+          -var="alarm_email=$ALARM_EMAIL" \
           -auto-approve
         working-directory: ${{env.working-directory}}
   
