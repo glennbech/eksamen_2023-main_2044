@@ -135,7 +135,7 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: | terraform plan   -var="prefix=$PREFIX" -var="image_identifier=$IMAGE_IDENTIFIER" -var="dashboard_name=$DASHBOARD_NAME" -var="service_name=$SERVICE_NAME"  -no-color
+        run: terraform plan   -var="prefix=$PREFIX" -var="image_identifier=$IMAGE_IDENTIFIER" -var="dashboard_name=$DASHBOARD_NAME" -var="service_name=$SERVICE_NAME"  -no-color
         continue-on-error: true
         working-directory: ${{env.working-directory}}
 
