@@ -9,4 +9,5 @@ variable "prefix" {
 
 variable "alarm_email" {
   type = string
+  default = "rebeckaspolander@yahoo.se" //Change to your email
 }

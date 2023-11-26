@@ -56,6 +56,6 @@ variable "prefix" {
   type = string
 }
 
-variable "alarm_email" {
-  type = string
-}
+//variable "alarm_email" {
+//  type = string
+//}
