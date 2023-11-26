@@ -133,7 +133,6 @@ jobs:
             -var="role_name=${{ env.CANDIDATE_PREFIX }}-role-thingye" \
             -var="policy_name=${{ env.CANDIDATE_PREFIX }}-apr-policy-thingy" \
             -no-color
-        continue-on-error: true
         working-directory: ${{ env.working-directory }}
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -150,6 +149,3 @@ jobs:
             -var="policy_name=${{ env.CANDIDATE_PREFIX }}-apr-policy-thingy" \
             -auto-approve
         working-directory: ${{ env.working-directory }}
-
-
-  
