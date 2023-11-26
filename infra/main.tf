@@ -23,7 +23,7 @@ resource "aws_apprunner_service" "service" {
 }
 
 resource "aws_iam_role" "role_for_apprunner_service" {
-  name               = var.role_name
+  name               = "${var.prefix}-role-thingye"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "policy" {
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = var.policy_name
+  name        = "${var.prefix}-apr-policy-thingy"
   description = "Policy for apprunner instance I think"
   policy      = data.aws_iam_policy_document.policy.json
 }

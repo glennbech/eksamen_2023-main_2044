@@ -7,7 +7,7 @@ variable "service_name" {
 variable "dashboard_name" {
   description = "The name of the dashboard name"
   type        = string
-  default     = "cloudwatch-candidate2044" // Change this default value as needed
+  //default     = "cloudwatch-candidate2044" // Change this default value as needed
 }
 
 variable "instance_cpu" {
@@ -43,13 +43,13 @@ variable "access_role_arn" {
 variable "role_name" {
   description = "The name of the IAM role for App Runner service"
   type        = string
-  default     = "candidate2044-role-thingye" // Set a default name or leave it empty to require an explicit value
+  //default     = "candidate2044-role-thingye" // Set a default name or leave it empty to require an explicit value
 }
 
 variable "policy_name" {
   description = "The name of the IAM policy for App Runner service"
   type        = string
-  default     = "candidate2044-apr-policy-thingy" // Set a default name or leave it empty to require an explicit value
+  //default     = "candidate2044-apr-policy-thingy" // Set a default name or leave it empty to require an explicit value
 }
 
 variable "prefix" {

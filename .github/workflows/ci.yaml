@@ -121,6 +121,9 @@ jobs:
       PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
       SERVICE_NAME: ${PREFIX}
       DASHBOARD_NAME: ${PREFIX}
+      ROLE_NAME: ${PREFIX}
+      POLICY_NAME: ${PREFIX} 
+      
       working-directory: ./infra
  #    TF_LOG: trace
     steps:
@@ -141,6 +144,8 @@ jobs:
           -var="image_identifier=$IMAGE_IDENTIFIER" \
           -var="dashboard_name=$DASHBOARD_NAME" \
           -var="service_name=$SERVICE_NAME" \
+          -var="role_name=$ROLE_NAME" \
+          -var="policy_name=$POLICY_NAME" \
           -no-color
         continue-on-error: true
         working-directory: ${{env.working-directory}}
@@ -158,6 +163,8 @@ jobs:
           -var="image_identifier=$IMAGE_IDENTIFIER" \
           -var="dashboard_name=$DASHBOARD_NAME" \
           -var="service_name=$SERVICE_NAME" \
+          -var="role_name=$ROLE_NAME" \
+          -var="policy_name=$POLICY_NAME" \
           -auto-approve
         working-directory: ${{env.working-directory}}
   
