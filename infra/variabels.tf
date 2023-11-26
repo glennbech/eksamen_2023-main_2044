@@ -4,7 +4,7 @@ variable "service_name" {
   //default     = "kjell-is-candidate2044" // Change this default value as needed
 }
 
-variable "candidate" {
+variable "dashboard_name" {
   description = "The name of the dashboard name"
   type        = string
   default     = "cloudwatch-candidate2044" // Change this default value as needed

@@ -1,7 +1,7 @@
 //ref: 
 //https://github.com/Rebeckaspolander/cloudwatch_alarms_terraform/blob/main/infra/main.tf
 resource "aws_cloudwatch_dashboard" "main" {
-  dashboard_name = var.candidate
+  dashboard_name = "cloudwatch-${var.prefix}"
   dashboard_body = <<DASHBOARD
 {
   "widgets": [
@@ -14,7 +14,7 @@ resource "aws_cloudwatch_dashboard" "main" {
       "properties": {
         "metrics": [
           [
-            "${var.candidate}",
+            "${var.dashboard_name}",
             "response_time",
             "service",
             "s3rekognition"
@@ -35,7 +35,7 @@ resource "aws_cloudwatch_dashboard" "main" {
       "properties": {
         "metrics": [
           [
-            "${var.candidate}",
+            "${var.dashboard_name}",
             "count_image", "service", "s3rekognition"
           ]
         ],
@@ -54,7 +54,7 @@ resource "aws_cloudwatch_dashboard" "main" {
       "properties": {
         "metrics": [
           [
-            "${var.candidate}",
+            "${var.dashboard_name}",
             "total_violation", "service", "s3rekognition"
           ]
         ],
