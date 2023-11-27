@@ -67,7 +67,7 @@ Därefter raderade man den ”gamla” branschen man jobbat i och skapat en ny f
 igenom samma flyt igen.
 
 B.
-1.Scrum/Smidig Metodik
+1. Scrum/Smidig Metodik
 Agile Scrum-metodik är ett projektledningssystem som är baserat på inkrementell/stegvis utveckling. Varje iteration kan bestå av två 
 till fyra veckor långa sprits. Före varje sprint bestämmer man sprint mål, alltså det teamet skall få gjort under dessa veckorna. 
 Varje sprint mål är att klara att få gjort det viktigaste funktionerna under den sprinten. För att så småningom komma fram till en 
@@ -90,7 +90,7 @@ Det negativa med scrum är bland annat att det fort kan se att man bygger funkti
 märkte av i vårt scrum projekt. Att feedback inte kans ges förens i slutet av sprinten och man vet inte om systemet är stabilt förens 
 i slutet (https://www.inflectra.com/Methodologies/Scrum.aspx#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20Potentially%20Shippable%20Product.).
 
-2.DevOps metodik
+2. DevOps metodik
 DevOps är en metod som integrerar och automatiserar arbetet med mjukvaruutveckling (Dev) och IT-drif (Ops) som är ett sätt att förbättra 
 och förkorta livscykeln för systemutveckling (https://en.wikipedia.org/wiki/DevOps).
 Man kan också förklara DevOps genom att människor samarbetar tillsammans för att skapa, bygga och leverera säker programvara i högsta hastighet. 
