@@ -1,39 +1,36 @@
 Sensor måste göra följande
-Oppgave 1:
--	Installea maven i cloud9 (om det används)
--	AWS Credentials – Skapa nya AWS nycklar  och lägga till dom som secrets i GitHub repository settings. 
-    Detta inkluderar AWS_ACCESS_KEY_ID og AWS_SECRET_ACCESS_KEY.
--	Kör comman in the terminal från mappen /kjell där tamplate.yaml ligger: 
+Oppgave 1:  
+-	Installea maven i cloud9 (om det används)  
+-	AWS Credentials – Skapa nya AWS nycklar  och lägga till dom som secrets i GitHub repository             settings. 
+    Detta inkluderar AWS_ACCESS_KEY_ID og AWS_SECRET_ACCESS_KEY.  
+-	Kör comman in the terminal från mappen /kjell där tamplate.yaml ligger:  
     CMD: sam deploy –stack-name your-stack-name –guided (Byt ut your-stack-name med ditt) 
-    Efter du kört denna CMD skall du ha fått en samconfig.toml file.
+    Efter du kört denna CMD skall du ha fått en samconfig.toml file.  
 -	Inne i  workflow filen ci.yaml behöver du ändra till ditt stack name(linje 63) och ECR repository name(linje 109). 
 
-NB! Var obs på att S3 bucket inte inne håller filer som inte är jpg eller png. 
+NB! Var obs på att S3 bucket inte inne håller filer som inte är jpg eller png.   
 -------- ------- ------- ------
-Oppgave 4:
--  Ändra namnet för cloudwatch namespace i filen: CloudWatchConfiguration.java linje 41.
--	Du behöver ändra i ci.yaml (linje 120, 121)
-    IMAGE_IDENTIFIER: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/<sporeb15-private>:latest
-    PREFIX: <candidate2044> 
--	I infra/provider.tf (Ändra så att du har samma som prefix värden)
-    backend "s3" {
-        bucket = "pgr301-2021-terraform-state"
-        key    = "candidate2044/apprunner-lab.state" # You chould change the candidate2044 to you own "name".
-        region = "eu-north-1"
-      }
-- Ändra till din egen mail:
-  I infra/variabels.tf variabeln alarm_mail (linje 56)
+Oppgave 4:  
+-  Ändra namnet för cloudwatch namespace i filen: CloudWatchConfiguration.java linje 41.  
+-	Du behöver ändra i ci.yaml (linje 120, 121)  
+    IMAGE_IDENTIFIER: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/<sporeb15-private>:latest  
+    PREFIX: <candidate2044>   
+-	I infra/provider.tf (Ändra så att du har samma som prefix värden)  
+    backend "s3" {  
+        bucket = "pgr301-2021-terraform-state"  
+        key    = "candidate2044/apprunner-lab.state" # You chould change the candidate2044 to you own       "name".
+        region = "eu-north-1"  
+      }  
+- Ändra till din egen mail:  
+  I infra/variabels.tf variabeln alarm_mail (linje 56)  
 
-CMD för att tesat end-points.
-mvn spring-boot:run
+CMD för att tesat end-points.  
+mvn spring-boot:run  
 
-curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket
-
-curl -X GET http://localhost:8080/count-image
-
-curl -X GET http://localhost:8080/total-violation
-
-curl -X GET http://localhost:8080/avg-response-time
+curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket  
+curl -X GET http://localhost:8080/count-image  
+curl -X GET http://localhost:8080/total-violation  
+curl -X GET http://localhost:8080/avg-response-time  
 
 
 CMD föra att sätta en metrics i alarm kan du köra denna (glöm inte att ändra till ditt namespace) :
@@ -45,24 +42,21 @@ Metrics end-points:
 Response time metrics (tekninsk målning):  
 När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för att tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling vara avgörande. Om svarstiden är hög kan det betyda att det finns prestanda problem som bör fixas för att behålla en optimal användarupplevelse och systystemets pålitlighet. Detta mått hjälper derför till att övervaka prestanan för denna applikation. 
 
-Alarm - Response time
+Alarm - Response time  
+Respons tid är som sagt en bra metric att övervaka för att förstå är det kan vara tid för att skalla upp eller optimera systemet. Skulle det vara så att respons tiden ofta är hög även vid normal belastning kan det vara dags att öka kapaciteten.   
+I en felsökningsprosses kan ett alarm vara till hjälp. När ett alarm utlöser kan det atomatiska processer som logginsamlingar och analyser som i sin tur hjälper till att snabbt kunna identifiera orsaken till problemet.   
 
-Respons tid är som sagt en bra metric att övervaka för att förstå är det kan vara tid för att skalla upp eller optimera systemet. Skulle det vara så att respons tiden ofta är hög även vid normal belastning kan det vara dags att öka kapaciteten. 
-I en felsökningsprosses kan ett alarm vara till hjälp. När ett alarm utlöser kan det atomatiska processer som logginsamlingar och analyser som i sin tur hjälper till att snabbt kunna identifiera orsaken till problemet. 
 
+Image count metrics (tekninsk målning):  
+Att övervaka av antal beatbetade bilder, är viktigt för Verne vakterna då det vill ge information om hur många bilder som har hanterats. Det kommer att hjälpa till att förstå arbetsbelastningen och systemets kapacitet. Det kan också hjälpa till att informera om skalningsbelsut och se till att säkerställa att infrastrukturen kan handtera belasting utan att försämra prestandan.   
 
-Image count metrics (tekninsk målning):
-
-Att övervaka av antal beatbetade bilder, är viktigt för Verne vakterna då det vill ge information om hur många bilder som har hanterats. Det kommer att hjälpa till att förstå arbetsbelastningen och systemets kapacitet. Det kan också hjälpa till att informera om skalningsbelsut och se till att säkerställa att infrastrukturen kan handtera belasting utan att försämra prestandan. 
-
-Total violation metrics (Forrerningsmessig målning):
-
+Total violation metrics (Forrerningsmessig målning):  
 Denna slutpunkt räkanar antalet överträdelser som upptäckts av systemet. För Verne Voktern kan det vara viktigt att upprätthålla vissa standader, detta mått kommer att visa hur många gånger dessa standader inte uppfylls. Genomatt spåra antalet gånger detta sker kan man till expempel trigga ett alarm eller en varning som informerar personen att dem måste åtgärna detta genast. Det kan också hjälpa till att med rapporteringar och trendanalyser för att sedan framöver kunna förbättra systemet.  
 
--------- ------- ------- ------
+-------- ------- ------- ------  
 
-Oppgave 5. 
-A.
+Oppgave 5.  
+A.  
 Kontinuerlig konfiguration betyder i praktiken att alla utvecklares koder (som skrivs i deras egna bransch/”arbetskopia”) 
 skall slås samman till huvud branschen (main), flera gånger om dagen (https://en.wikipedia.org/wiki/Continuous_integration). 
 Innan en utvecklare i ett team kan pusha sin bransch(kod) till main. Bör den bli checkat och godkänd av en annan i teamet. 
@@ -89,8 +83,8 @@ Men om koden var godkänd av andra team medlemmar var nästa steg att slå samma
 Därefter raderade man den ”gamla” branschen man jobbat i och skapat en ny för nästa kod som hen skulle skriva. Och allting måste gå 
 igenom samma flyt igen.
 
-B.
-1. Scrum/Smidig Metodik
+B.   
+1. Scrum/Smidig Metodik  
 Agile Scrum-metodik är ett projektledningssystem som är baserat på inkrementell/stegvis utveckling. Varje iteration kan bestå av två 
 till fyra veckor långa sprits. Före varje sprint bestämmer man sprint mål, alltså det teamet skall få gjort under dessa veckorna. 
 Varje sprint mål är att klara att få gjort det viktigaste funktionerna under den sprinten. För att så småningom komma fram till en 
@@ -113,7 +107,7 @@ Det negativa med scrum är bland annat att det fort kan se att man bygger funkti
 märkte av i vårt scrum projekt. Att feedback inte kans ges förens i slutet av sprinten och man vet inte om systemet är stabilt förens 
 i slutet (https://www.inflectra.com/Methodologies/Scrum.aspx#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20Potentially%20Shippable%20Product.).
 
-2. DevOps metodik
+2. DevOps metodik  
 DevOps är en metod som integrerar och automatiserar arbetet med mjukvaruutveckling (Dev) och IT-drif (Ops) som är ett sätt att förbättra 
 och förkorta livscykeln för systemutveckling (https://en.wikipedia.org/wiki/DevOps).
 Man kan också förklara DevOps genom att människor samarbetar tillsammans för att skapa, bygga och leverera säker programvara i högsta hastighet. 
@@ -126,7 +120,7 @@ att använda sig av microtjänster i DevOps kan göra det svårare att hantera f
 felsöka problem och att säkerställa att hela systemet fungerar korrekt. En annan utmaning med DevOps är att hantera förändringar, då 
 detta kräver en snabb implementering. Att byta ett system innebär också nya risker och sårbarheter (https://sematext.com/blog/devops-challenges/).
 
-3. Sammenligning och kontrast:
+3. Sammenligning och kontrast:  
 När man skall jämföra scrum och DevOps metodik i förhållande till deras påverkan på programvarukvalitet och leveranstempo, menar jag att båda 
 metodikernas syfte är att förbättra kvaliteten och tempot men på olika sätt. Scrum handlar mycket om hur man jobbar, hur och vad kan man 
 göra för förbättringar samt förändringar för att komma i mål. Men i DevOps handlar det om integrerar/slå samman utveckling med operativa 
@@ -145,7 +139,7 @@ Men egentligen skulle jag vilja säga att en blandning av båda metodikerna hade
 och en ständigt analysering på vad som fungerar samt vad som måste förbättras i teamet. Men man önskar också att ge snabb feedback 
 och finna felen och rätta till dem fort. 
 
-C.
+C.  
 Om jag skulle implementera en ny funktionalitet i en applikation jag jobbar med skulle jag använda Github där jag skulle ställa in 
 inställningar som gör att det är ett krav att en eller flera måste godkänna koden innan den kan flätas samman med main branschen. 
 Feedback från andra vill bidra till ständigt lärande från andra som kanske har mer erfarenheter eller andra kunskaper. 
