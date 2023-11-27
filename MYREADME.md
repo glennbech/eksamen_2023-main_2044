@@ -24,26 +24,36 @@ Oppgave 4:
 - Ändra till din egen mail:
   I infra/variabels.tf variabeln alarm_mail (linje 56)
 
-CMD föra att sätta en metrics i alarm kan du köra denna (glöm inte att ändra till ditt namespace) :
-aws cloudwatch put-metric-data --namespace "<cloudwatch-candidate2044>" --metric-name "response_time" --value 3000 --unit Milliseconds
-
 CMD för att tesat end-points.
 mvn spring-boot:run
 
 curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket
 
 curl -X GET http://localhost:8080/count-image
+
 curl -X GET http://localhost:8080/total-violation
+
 curl -X GET http://localhost:8080/avg-response-time
+
+
+CMD föra att sätta en metrics i alarm kan du köra denna (glöm inte att ändra till ditt namespace) :
+aws cloudwatch put-metric-data --namespace "<cloudwatch-candidate2044>" --metric-name "response_time" --value 3000 --unit Milliseconds
+
+
 
 Oppgave 4.
 Metrics end-points:
 
 Response time metrics (tekninsk målning):
 
-När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för
-tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling 
-vara avgörande. Om svarstiden är hög kan det betyda att det finns prestanda problem som bör fixas för att behålla en optimal användarupplevelse och systystemets pålitlighet. Detta mått hjälper derför till att övervaka prestanan för denna applikation. 
+När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för att tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling vara avgörande. Om svarstiden är hög kan det betyda att det finns prestanda problem som bör fixas för att behålla en optimal användarupplevelse och systystemets pålitlighet. Detta mått hjälper derför till att övervaka prestanan för denna applikation. 
+
+Alarm - Response time
+Respons tid är som sagt en bra metric att övervaka för att förstå är det kan vara tid för att skalla upp eller optimera systemet. Skulle det vara så att respons tiden ofta är hög även vid normal belastning kan det vara dags att öka kapaciteten. 
+I en felsökningsprosses kan ett alarm vara till hjälp. När ett alarm utlöser kan det atomatiska processer som logginsamlingar och analyser som i sin tur hjälper till att snabbt kunna identifiera orsaken till problemet. 
+
+
+
 
 Image count metrics (tekninsk målning):
 
