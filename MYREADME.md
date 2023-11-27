@@ -36,9 +36,23 @@ curl -X GET http://localhost:8080/count-image
 curl -X GET http://localhost:8080/total-violation
 curl -X GET http://localhost:8080/avg-response-time
 
+Oppgave 4.
+Metrics end-points:
+Response time metrics:
+När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för
+tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling 
+vara avgörande. Om svarstiden är hög kan det betyda att det finns prestanda problem som bör fixas för att behålla en optimal användarupplevelse och systystemets pålitlighet. Detta mått hjälper derför till att övervaka prestanan för denna applikation. 
+
+Image count metrics:
+Att övervaka av antal beatbetade bilder, är viktigt för Verne vakterna då det vill ge information om hur många bilder som har hanterats. Det kommer att hjälpa till att förstå arbetsbelastningen och systemets kapacitet. Det kan också hjälpa till att informera om skalningsbelsut och se till att säkerställa att infrastrukturen kan handtera belasting utan att försämra prestandan. 
+
+Total violation metrics:
+Denna slutpunkt räkanar antalet överträdelser som upptäckts av systemet. För Verne Voktern kan det vara viktigt att upprätthålla vissa standader, detta mått kommer att visa hur många gånger dessa standader inte uppfylls. Genomatt spåra antalet gånger detta sker kan man till expempel trigga ett alarm eller en varning som informerar personen att dem måste åtgärna detta genast. Det kan också hjälpa till att med rapporteringar och trendanalyser för att sedan framöver kunna förbättra systemet.  
+
+
+
 
 Oppgave 5. 
-
 A.
 Kontinuerlig konfiguration betyder i praktiken att alla utvecklares koder (som skrivs i deras egna bransch/”arbetskopia”) 
 skall slås samman till huvud branschen (main), flera gånger om dagen (https://en.wikipedia.org/wiki/Continuous_integration). 
