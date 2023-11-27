@@ -33,8 +33,8 @@ curl -X GET http://localhost:8080/total-violation
 curl -X GET http://localhost:8080/avg-response-time  
 
 
-CMD föra att sätta en metrics i alarm kan du köra denna (glöm inte att ändra till ditt namespace) :
-aws cloudwatch put-metric-data --namespace "<cloudwatch-candidate2044>" --metric-name "response_time" --value 3000 --unit Milliseconds
+CMD föra att sätta en metrics i alarm kan du köra denna (glöm inte att ändra till ditt namespace) :  
+aws cloudwatch put-metric-data --namespace "cloudwatch-candidate2044" --metric-name "response_time" --value 3000 --unit Milliseconds
 
 
 Oppgave 4.
@@ -83,12 +83,9 @@ Men om koden var godkänd av andra team medlemmar var nästa steg att slå samma
 Därefter raderade man den ”gamla” branschen man jobbat i och skapat en ny för nästa kod som hen skulle skriva. Och allting måste gå 
 igenom samma flyt igen.
 
-B.   
-1. Scrum/Smidig Metodik  
-Agile Scrum-metodik är ett projektledningssystem som är baserat på inkrementell/stegvis utveckling. Varje iteration kan bestå av två 
-till fyra veckor långa sprits. Före varje sprint bestämmer man sprint mål, alltså det teamet skall få gjort under dessa veckorna. 
-Varje sprint mål är att klara att få gjort det viktigaste funktionerna under den sprinten. För att så småningom komma fram till en 
-potential leveransbar produkt (https://www.inflectra.com/Methodologies/Scrum.aspx#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20Potentially%20Shippable%20Product.).
+B.  
+1 Scrum/Smidig Metodik:  
+Agile Scrum-metodik är ett projektledningssystem som är baserat på inkrementell/stegvis utveckling. Varje iteration kan bestå av två till fyra veckor långa sprits. Före varje sprint bestämmer man sprint mål, alltså det teamet skall få gjort under dessa veckorna. Varje sprint mål är att klara att få gjort det viktigaste funktionerna under den sprinten. För att så småningom komma fram till en potential leveransbar produkt (https://www.inflectra.com/Methodologies/Scrum.aspx#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20Potentially%20Shippable%20Product.).
 
 Scrum används för att få gjort arbete i små delar åt gången. Där man genom hela vägen ger feedback för att lära och förbättra allt eftersom. 
 Scrum är också en bra metod för team att ständigt förbättra samarbetet med varandra. 
@@ -105,9 +102,10 @@ teamet kommer närmare varandra och samt förbättrade vårt samarbete med varan
 
 Det negativa med scrum är bland annat att det fort kan se att man bygger funktioner som inte kommer att behövas, detta var något jag 
 märkte av i vårt scrum projekt. Att feedback inte kans ges förens i slutet av sprinten och man vet inte om systemet är stabilt förens 
-i slutet (https://www.inflectra.com/Methodologies/Scrum.aspx#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20Potentially%20Shippable%20Product.).
+i slutet (https://www.inflectra.com/Methodologies/Scrum.aspx#:~:text=Agile%20scrum%20methodology%20is%20a,with%20a%20Potentially%20Shippable%20Product.).  
 
-2. DevOps metodik  
+
+2 DevOps metodik:   
 DevOps är en metod som integrerar och automatiserar arbetet med mjukvaruutveckling (Dev) och IT-drif (Ops) som är ett sätt att förbättra 
 och förkorta livscykeln för systemutveckling (https://en.wikipedia.org/wiki/DevOps).
 Man kan också förklara DevOps genom att människor samarbetar tillsammans för att skapa, bygga och leverera säker programvara i högsta hastighet. 
@@ -119,8 +117,8 @@ Exempel på utmaning med att gå över till en DevOps modell är att bestämma v
 att använda sig av microtjänster i DevOps kan göra det svårare att hantera flera oberoende distribuerande tjänstekomponenter, som  till exempel 
 felsöka problem och att säkerställa att hela systemet fungerar korrekt. En annan utmaning med DevOps är att hantera förändringar, då 
 detta kräver en snabb implementering. Att byta ett system innebär också nya risker och sårbarheter (https://sematext.com/blog/devops-challenges/).
-
-3. Sammenligning och kontrast:  
+ 
+3 Sammenligning och kontrast:      
 När man skall jämföra scrum och DevOps metodik i förhållande till deras påverkan på programvarukvalitet och leveranstempo, menar jag att båda 
 metodikernas syfte är att förbättra kvaliteten och tempot men på olika sätt. Scrum handlar mycket om hur man jobbar, hur och vad kan man 
 göra för förbättringar samt förändringar för att komma i mål. Men i DevOps handlar det om integrerar/slå samman utveckling med operativa 
