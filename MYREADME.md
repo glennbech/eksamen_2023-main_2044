@@ -41,10 +41,8 @@ aws cloudwatch put-metric-data --namespace "<cloudwatch-candidate2044>" --metric
 
 
 Oppgave 4.
-Metrics end-points:
-
-Response time metrics (tekninsk målning):
-
+Metrics end-points:  
+Response time metrics (tekninsk målning):  
 När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för att tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling vara avgörande. Om svarstiden är hög kan det betyda att det finns prestanda problem som bör fixas för att behålla en optimal användarupplevelse och systystemets pålitlighet. Detta mått hjälper derför till att övervaka prestanan för denna applikation. 
 
 Alarm - Response time
