@@ -6,7 +6,8 @@ Oppgave 1:
 -	Kör comman in the terminal från mappen /kjell där tamplate.yaml ligger:  
     CMD: sam deploy –stack-name your-stack-name –guided (Byt ut your-stack-name med ditt) 
     Efter du kört denna CMD skall du ha fått en samconfig.toml file.  
--	Inne i  workflow filen ci.yaml behöver du ändra till ditt stack name(linje 63) och ECR repository name(linje 109). 
+-	Inne i  workflow filen ci.yaml behöver du ändra till ditt stack name(linje 63) och ECR repository name(linje 109).
+-	Husk på att du kan behöva "aktivera" github actions på din fork. 
 
 NB! Var obs på att S3 bucket inte inne håller filer som inte är jpg eller png.   
 -------- ------- ------- ------
