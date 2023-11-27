@@ -1,3 +1,5 @@
+#ref:
+#https://docs.docker.com/engine/reference/builder/
 # Velg et base image med Python 3
 FROM python:3.9-slim
 

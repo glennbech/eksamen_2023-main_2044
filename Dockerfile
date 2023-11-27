@@ -1,3 +1,5 @@
+#ref:
+# https://github.com/Rebeckaspolander/spring-docker-dockerhub/blob/main/Dockerfile
 FROM maven:3.6-jdk-11 as builder
 WORKDIR /app
 COPY pom.xml .

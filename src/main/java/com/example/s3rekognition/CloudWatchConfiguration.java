@@ -38,7 +38,7 @@ public class CloudWatchConfiguration {
     private CloudWatchConfig setupCloudWatchConfig() {
         return new CloudWatchConfig() {
             private Map<String, String> configuration = Map.of(
-                    "cloudwatch.namespace", "cloudwatch-candidate2044",
+                    "cloudwatch.namespace", "cloudwatch-candidate2044", // Change to your own namespace
                     "cloudwatch.step", Duration.ofSeconds(5).toString());
 
             @Override

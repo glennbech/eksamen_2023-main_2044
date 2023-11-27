@@ -15,7 +15,7 @@ defaults:
 
 env:
   AWS_REGION: eu-west-1
-  S3_BUCKET: kjellsbucket2044  # Define the bucket name here for use throughout
+  S3_BUCKET: kjellsimagebucket  # Define the bucket name here for use throughout
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
           fi
         env:
           AWS_REGION: eu-west-1
-          S3_BUCKET: kjellsbucket2044
+          S3_BUCKET: kjellsimagebucket
           AWS_DEFAULT_REGION: eu-west-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -69,7 +69,7 @@ jobs:
               --parameter-overrides BucketNameParameter=${{ env.S3_BUCKET }}
         env:
           AWS_REGION: eu-west-1
-          S3_BUCKET: kjellsbucket2044
+          S3_BUCKET: kjellsimagebucket
           AWS_DEFAULT_REGION: eu-west-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -90,7 +90,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
         env:
           AWS_REGION: eu-west-1
-          S3_BUCKET: kjellsbucket2044
+          S3_BUCKET: kjellsimagebucket
           
       - name: Login to Amazon ECR
         id: login-ecr
@@ -104,9 +104,9 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         env:
           AWS_REGION: eu-west-1
-          S3_BUCKET: kjellsbucket2044
+          S3_BUCKET: kjellsimagebucket
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: sporeb15-private
+          ECR_REPOSITORY: sporeb15-private # Change to your repository
           IMAGE_TAG: ${{ github.sha }}
   
   terraform:

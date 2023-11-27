@@ -14,7 +14,7 @@ Globals:
 Parameters:
   BucketNameParameter:
     Type: String
-    Description: kjellsbucket2044
+    Description: kjellsimagebucket
 
 Resources:
   Bucket:
