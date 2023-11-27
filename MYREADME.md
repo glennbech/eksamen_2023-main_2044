@@ -38,6 +38,7 @@ curl -X GET http://localhost:8080/avg-response-time
 
 Oppgave 4.
 Metrics end-points:
+
 Response time metrics:
 När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för
 tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling 
