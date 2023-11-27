@@ -9,7 +9,7 @@ Oppgave 1:
 -	Inne i  workflow filen ci.yaml behöver du ändra till ditt stack name(linje 63) och ECR repository name(linje 109). 
 
 NB! Var obs på att S3 bucket inte inne håller filer som inte är jpg eller png. 
-
+-------- ------- ------- ------
 Oppgave 4:
 -  Ändra namnet för cloudwatch namespace i filen: CloudWatchConfiguration.java linje 41.
 -	Du behöver ändra i ci.yaml (linje 120, 121)
@@ -40,7 +40,6 @@ CMD föra att sätta en metrics i alarm kan du köra denna (glöm inte att ändr
 aws cloudwatch put-metric-data --namespace "<cloudwatch-candidate2044>" --metric-name "response_time" --value 3000 --unit Milliseconds
 
 
-
 Oppgave 4.
 Metrics end-points:
 
@@ -49,10 +48,9 @@ Response time metrics (tekninsk målning):
 När det kommer till applikationen prestande är det viktigt att hålla en låg svarstid då det kan vara avgörande för att tillgodo se nöja användare men också systemets effektivitet. I samband med Verne Vokterne kan snabb databehandling vara avgörande. Om svarstiden är hög kan det betyda att det finns prestanda problem som bör fixas för att behålla en optimal användarupplevelse och systystemets pålitlighet. Detta mått hjälper derför till att övervaka prestanan för denna applikation. 
 
 Alarm - Response time
+
 Respons tid är som sagt en bra metric att övervaka för att förstå är det kan vara tid för att skalla upp eller optimera systemet. Skulle det vara så att respons tiden ofta är hög även vid normal belastning kan det vara dags att öka kapaciteten. 
 I en felsökningsprosses kan ett alarm vara till hjälp. När ett alarm utlöser kan det atomatiska processer som logginsamlingar och analyser som i sin tur hjälper till att snabbt kunna identifiera orsaken till problemet. 
-
-
 
 
 Image count metrics (tekninsk målning):
@@ -63,8 +61,7 @@ Total violation metrics (Forrerningsmessig målning):
 
 Denna slutpunkt räkanar antalet överträdelser som upptäckts av systemet. För Verne Voktern kan det vara viktigt att upprätthålla vissa standader, detta mått kommer att visa hur många gånger dessa standader inte uppfylls. Genomatt spåra antalet gånger detta sker kan man till expempel trigga ett alarm eller en varning som informerar personen att dem måste åtgärna detta genast. Det kan också hjälpa till att med rapporteringar och trendanalyser för att sedan framöver kunna förbättra systemet.  
 
-
-
+-------- ------- ------- ------
 
 Oppgave 5. 
 A.
