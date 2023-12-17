@@ -15,7 +15,7 @@ defaults:
 
 env:
   AWS_REGION: eu-west-1
-  S3_BUCKET: kjellsimagebucket  # Define the bucket name here for use throughout
+  S3_BUCKET: 2044-bucket  # Define the bucket name here for use throughout
 
 jobs:
   build:
@@ -106,7 +106,7 @@ jobs:
           AWS_REGION: eu-west-1
           S3_BUCKET: kjellsimagebucket
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: sporeb15-private # Change to your repository
+          ECR_REPOSITORY: sporeb15-private
           IMAGE_TAG: ${{ github.sha }}
   
   terraform:
@@ -117,15 +117,15 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: eu-west-1
-      IMAGE_IDENTIFIER: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest #Change the <sporeb15-private> to your ECR repository
-      PREFIX: candidate2044 # Change this so it matches the key name inside the provider.tf
+      IMAGE_IDENTIFIER: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest
+      PREFIX: candidate2044
       SERVICE_NAME: ${PREFIX}
       DASHBOARD_NAME: ${PREFIX}
       ROLE_NAME: ${PREFIX}
       POLICY_NAME: ${PREFIX}
       
       working-directory: ./infra
- #    TF_LOG: trace
+
     steps:
       - uses: actions/checkout@v3
       - name: Setup Terraform
