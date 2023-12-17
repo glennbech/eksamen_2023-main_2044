@@ -118,7 +118,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: eu-west-1
       IMAGE_IDENTIFIER: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/sporeb15-private:latest
-      PREFIX: candidate2044
+      PREFIX: candidate2044sensur
       SERVICE_NAME: ${PREFIX}
       DASHBOARD_NAME: ${PREFIX}
       ROLE_NAME: ${PREFIX}

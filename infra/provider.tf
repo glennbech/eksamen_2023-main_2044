@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "pgr301-2021-terraform-state"
-    key    = "candidate2044/apprunner-lab.state" # You chould change the candidate2044 to you own "name".
+    key    = "candidate2044/apprunner-lab-another.state" # You chould change the candidate2044 to you own "name".
     region = "eu-north-1"
   }
 }
